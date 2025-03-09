@@ -1,66 +1,110 @@
-import React from "react";
+import {
+	Disclosure,
+	DisclosureButton,
+	DisclosurePanel,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuItems,
+} from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useNavigate, Link } from "react-router-dom";
 
-function NavBar() {
-	return (
-		<nav class="bg-transparent border-gray-200 ">
-			<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-				{/* <a
-					href="https://flowbite.com/"
-					class="flex items-center space-x-3 rtl:space-x-reverse"
-				>
-					<span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-						TOdo
-					</span>
-				</a> */}
-				<button
-					data-collapse-toggle="navbar-default"
-					type="button"
-					class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-					aria-controls="navbar-default"
-					aria-expanded="false"
-				>
-					<span class="sr-only">Open main menu</span>
-					<svg
-						class="w-5 h-5"
-						aria-hidden="true"
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 17 14"
-					>
-						<path
-							stroke="currentColor"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M1 1h15M1 7h15M1 13h15"
-						/>
-					</svg>
-				</button>
-				<div class="hidden w-full md:block md:w-auto" id="navbar-default">
-					<ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-transparent md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 ">
-						<li className="text-neutral-50">
-							<Link to="/">Home</Link>
-						</li>
-						<li className="text-neutral-50">
-							<Link to="/todo">Todos</Link>
-						</li>
-						<li>
-							<Link to="/about">About</Link>
-						</li>
-						<li>
-							<a
-								href="#"
-								class="block py-2 px-3 text-neutral-50 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-							>
-								Contact
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	);
+const navigation = [
+	{ name: "Home", href: "/", current: true },
+	{ name: "To-Do", href: "/todo", current: false },
+	{ name: "About", href: "/about", current: false },
+];
+
+function classNames(...classes) {
+	return classes.filter(Boolean).join(" ");
 }
 
-export default NavBar;
+export default function Example() {
+	const navigate = useNavigate();
+
+	return (
+		<Disclosure as="nav" className="bg-transparent">
+			<div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+				<div className="relative flex h-16 items-center justify-between">
+					<div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+						{/* Mobile menu button*/}
+						<DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+							<span className="absolute -inset-0.5" />
+							<span className="sr-only">Open main menu</span>
+							<Bars3Icon
+								aria-hidden="true"
+								className="block size-6 group-data-[open]:hidden"
+							/>
+							<XMarkIcon
+								aria-hidden="true"
+								className="hidden size-6 group-data-[open]:block"
+							/>
+						</DisclosureButton>
+					</div>
+					<div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start cursor-pointer">
+						<div className="flex shrink-0 items-center">
+							{/* LOGO */}
+							<Link to="/">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="white "
+									viewBox="0 0 24 24"
+									strokeWidth={1.5}
+									stroke="indigo"
+									className="size-9"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+									/>
+								</svg>
+							</Link>
+						</div>
+						<div className="hidden sm:ml-6 sm:block">
+							<div className="flex space-x-4">
+								{navigation.map((item) => (
+									<a
+										key={item.name}
+										href={item.href}
+										aria-current={item.current ? "page" : undefined}
+										className={classNames(
+											item.current
+												? "bg-indigo-700 text-white"
+												: "text-gray-300 hover:bg-gray-700 hover:text-white",
+											"rounded-md px-3 py-2 text-sm font-medium"
+										)}
+									>
+										{item.name}
+									</a>
+								))}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<DisclosurePanel className="sm:hidden">
+				<div className="space-y-1 px-2 pb-3 pt-2">
+					{navigation.map((item) => (
+						<DisclosureButton
+							key={item.name}
+							as="a"
+							href={item.href}
+							aria-current={item.current ? "page" : undefined}
+							className={classNames(
+								item.current
+									? "bg-gray-900 text-white"
+									: "text-gray-300 hover:bg-gray-700 hover:text-white",
+								"block rounded-md px-3 py-2 text-base font-medium"
+							)}
+						>
+							{item.name}
+						</DisclosureButton>
+					))}
+				</div>
+			</DisclosurePanel>
+		</Disclosure>
+	);
+}

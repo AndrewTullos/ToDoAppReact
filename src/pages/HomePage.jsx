@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import todoImage from "../assets/TODO.png";
 
 const navigation = [
 	{ name: "Product", href: "#" },
@@ -123,7 +124,7 @@ export default function HomePage() {
 							<div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
 								<div className="hidden sm:mb-10 sm:flex">
 									<div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-100 ring-1 ring-gray-100/10 hover:ring-indigo-400/70">
-										Anim aute id magna aliqua ad ad non deserunt sunt.{" "}
+										Get Organized. Stay Focused.{"  "}
 										<a
 											href="#"
 											className="whitespace-nowrap font-semibold text-indigo-600"
@@ -134,21 +135,27 @@ export default function HomePage() {
 									</div>
 								</div>
 								<h1 className="text-pretty text-5xl font-semibold tracking-tight text-gray-100 sm:text-7xl">
-									To-Do-Application Interface
+									Manage Your To-Dos
 								</h1>
+								<h3 className="text-pretty text-base font-semibold tracking-tight text-gray-200 sm:text-3xl">
+									The Smart Way{" "}
+								</h3>
 								<p className="mt-8 text-pretty text-lg font-medium text-gray-50 sm:text-xl/8">
-									Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-									qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
-									occaecat fugiat aliqua.
+									From daily errands to big projects, manage everything in one
+									place. Set reminders, categorize tasks, and achieve your
+									goals.
 								</p>
 								<div className="mt-10 flex items-center gap-x-6">
 									<a
-										href="#"
+										href="/todo"
 										className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 									>
 										Get started
 									</a>
-									<a href="#" className="text-sm/6 font-semibold text-gray-100">
+									<a
+										href="/about"
+										className="text-sm/6 font-semibold text-gray-100"
+									>
 										Learn more <span aria-hidden="true">→</span>
 									</a>
 								</div>
@@ -158,8 +165,8 @@ export default function HomePage() {
 				</div>
 				<div className="bg-transparent lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
 					<img
-						alt=""
-						src="https://images.unsplash.com/photo-1483389127117-b6a2102724ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80"
+						alt="To-Do-Text"
+						src={todoImage}
 						className="aspect-[3/2] object-cover lg:aspect-auto lg:size-full"
 					/>
 				</div>
